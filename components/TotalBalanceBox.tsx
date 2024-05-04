@@ -1,27 +1,31 @@
 import AnimateCount from './AnimateCount';
 import DoughnutChart from './DoughnutChart';
-import react from 'react';
 
-const TotalBalanceBox = ({ accounts = [], totalBanks, totalCurrentBalance }: TotlaBalanceBoxProps) => {
+const TotalBalanceBox = ({
+    accounts = [], totalBanks, totalCurrentBalance
+}: TotlaBalanceBoxProps) => {
     return (
-        <section className="total-balance bg-gray-950">
-            <div className="p-4 bg-blue-950/50 rounded-lg">
+        <section className="total-balance">
+            <div className="total-balance-chart">
                 <DoughnutChart accounts={accounts} />
             </div>
 
-            <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-bold text-white">
-                    Connected Accounts: {totalBanks}
+            <div className="flex flex-col gap-6">
+                <h2 className="header-2">
+                    Bank Accounts: {totalBanks}
                 </h2>
-                <div className="flex flex-col gap-1 text-white">
-                    <p className="text-sm">Total Balance:</p>
-                    <div className="total-balance-amount flex items-center gap-2 text-2xl font-bold">
+                <div className="flex flex-col gap-2">
+                    <p className="total-balance-label">
+                        Total Current Balance
+                    </p>
+
+                    <div className="total-balance-amount flex-center gap-2">
                         <AnimateCount amount={totalCurrentBalance} />
                     </div>
                 </div>
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default TotalBalanceBox;
+export default TotalBalanceBox
