@@ -5,7 +5,7 @@ import BankCard from './BankCard'
 
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
     return (
-        <aside className='right-sidebar text-white bg-gray-900'>
+        <aside className='right-sidebar rounded-tl-xl'>
             <section className='flex flex-col pb-8'>
                 <div className='profile-banner' />
                 <div className='profile'>
@@ -22,18 +22,18 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
             </section>
 
             <section className='banks'>
-                <div className='flex w-full justify-between'>
+                <div className='flex w-full justify-between items-center mb-4'>
                     <h2 className='header-2'>
                         My Banks
                     </h2>
-                    <Link href='/' className='flex gap-2'>
+                    <Link href='/add-bank' className='flex items-center gap-2'>
                         <Image
                             src='/icons/plus.svg'
                             width={20}
                             height={20}
-                            alt='+'
+                            alt='Add Bank'
                         />
-                        <h2 className='text-14 font-semibold text-gray-400'>Add Bank</h2>
+                        <h2 className='text-lg font-semibold text-gray-400'>Add Bank</h2>
                     </Link>
                 </div>
                 {banks?.length > 0 && (
