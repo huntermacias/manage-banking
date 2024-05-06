@@ -175,7 +175,7 @@
 
   /* Right Sidebar */
   .right-sidebar {
-    @apply hidden h-screen max-h-screen flex-col border-l border-gray-700 bg-gradient-to-br slide-in-from-right-full from-slate-700 to-slate-950 text-white xl:flex w-[455px] xl:overflow-y-scroll no-scrollbar;
+    @apply hidden xl:flex h-screen max-h-screen flex-col fixed right-0 top-0 border-l border-gray-700 bg-gradient-to-br from-slate-700 to-slate-950 text-white xl:overflow-y-auto no-scrollbar;
   }
 
   .profile-banner {
@@ -240,7 +240,7 @@
 
   /* HeaderBox */
   .header-box {
-    @apply flex flex-col gap-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-8 px-6 rounded-lg shadow-lg;
+    @apply flex flex-col gap-1 bg-gradient-to-br from-slate-600 to-slate-950 border-l-4 border-gray-400 text-white py-8 px-6 rounded-lg;
   }
 
   .header-box-title {
@@ -255,21 +255,22 @@
 
   /* Bank Card */
   .bank-card {
-    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white/20 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-xl backdrop-blur-lg;
+    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white/10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 shadow-2xl backdrop-blur-md transition-all duration-300 ease-in-out;
   }
 
   .bank-card_content {
-    @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-opacity-60 bg-gradient-to-b from-gray-700 to-gray-900 px-5 pb-4 pt-5 border-l-4 border-white/20;
+    @apply relative z-20 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-opacity-70 bg-gradient-to-b from-[#00000f]/80 to-[#800020]/80 px-5 pb-4 pt-5 border-l-4 border-white/30;
   }
 
   .bank-card_icon {
-    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-gradient-to-r from-gray-700 to-gray-900 bg-cover bg-center bg-no-repeat py-5 pr-5;
+    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-gradient-to-r from-gray-800 to-gray-900 bg-cover bg-center bg-no-repeat py-5 pr-5;
   }
 
   /* Bank Info */
   .bank-info {
-    @apply gap-[18px] flex p-4 transition-all border bg-blue-100/30 border-transparent rounded-lg shadow-sm;
+    @apply gap-[18px] flex p-4 transition-all border bg-blue-100/50 border-transparent rounded-lg shadow-md;
   }
+
 
 
   /* Category Badge */
@@ -370,7 +371,7 @@
 
   /* Footer */
   .footer {
-    @apply flex cursor-pointer items-center justify-between gap-4 py-2 bg-gray-900 border border-gray-400/30 rounded-lg text-white px-4;
+    @apply flex cursor-pointer items-center justify-between gap-4 py-2 bg-[#1e1e1] border border-gray-400/30 rounded-lg text-white px-4;
   }
 
   .footer_name,

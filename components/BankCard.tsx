@@ -1,6 +1,8 @@
 import { formatAmount } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
+import React, { forwardRef } from 'react';
+
 
 const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) => {
     return (
@@ -9,7 +11,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
                 <div className="bank-card_content">
                     <div>
                         <h1 className="text-16 font-semibold text-white">
-                            {account.name || userName}
+                            {userName}
                         </h1>
                         <p className="font-ibm-plex-serif font-black text-white">
                             {formatAmount(account.currentBalance)}
@@ -27,20 +29,20 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
                         </p>
                     </article>
                 </div>
-                <div className="bank-card_icon">
+                <div className="bank-card_icon border-l border-gray-500">
                     <Image
                         src="/icons/Paypass.svg"
                         width={25}
                         height={29}
                         alt="pay"
-                        className="bg-gray-950/50 rounded-full p-0.5"
+                        className="bg-[#00000f] rounded-full "
                     />
                     <Image
                         src="/icons/mastercard.svg"
                         width={45}
                         height={32}
                         alt="mastercard"
-                        className="ml-5 bg-gray-950/50 rounded-md"
+                        className="ml-5 bg-red-900/50 rounded-full"
                     />
                 </div>
                 <Image
@@ -56,3 +58,64 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
 }
 
 export default BankCard
+
+
+
+// import { RefObject, forwardRef } from 'react';
+// import { formatAmount } from "@/lib/utils";
+// import Image from "next/image";
+// import Link from "next/link";
+// import { motion } from "framer-motion";
+
+// const BankCard = forwardRef(({ account, userName, showBalance = true }: CreditCardProps, ref) => {
+//     return (
+//         <motion.div drag="y" className="flex flex-col">
+//             <div className='bank-card'>
+//                 <div className="bank-card_content">
+//                     <div>
+//                         <h1 className="text-16 font-semibold text-white">
+//                             {account.officialName || account.name}
+//                         </h1>
+//                         <p className="font-ibm-plex-serif font-black text-white">
+//                             {formatAmount(account.currentBalance)}
+//                         </p>
+//                     </div>
+//                     <article className="flex flex-col gap-2">
+//                         <div className="flex justify-between">
+//                             <h1 className="text-12 font-semibold text-white">{userName}</h1>
+//                             <h2 className="text-12 font-semibold text-white">●● / ●●</h2>
+//                         </div>
+//                         <p className="text-14 font-semibold tracking-[1.1px] text-white">
+//                             ●●●● ●●●● ●●●● <span className="text-16">{account.mask || 1234}</span>
+//                         </p>
+//                     </article>
+//                 </div>
+//                 <div className="bank-card_icon border-l border-gray-500">
+//                     <Image
+//                         src="/icons/Paypass.svg"
+//                         width={25}
+//                         height={29}
+//                         alt="pay"
+//                         className="bg-[#00000f] rounded-full "
+//                     />
+//                     <Image
+//                         src="/icons/mastercard.svg"
+//                         width={45}
+//                         height={32}
+//                         alt="mastercard"
+//                         className="ml-5 bg-red-900/50 rounded-full"
+//                     />
+//                 </div>
+//                 <Image
+//                     src="/icons/lines.png"
+//                     width={316}
+//                     height={190}
+//                     alt="pay"
+//                     className="absolute top-0 left-0"
+//                 />
+//             </div>
+//         </motion.div >
+//     );
+// });
+
+// export default BankCard;

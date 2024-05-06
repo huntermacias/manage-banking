@@ -1,0 +1,4 @@
+#800020 - sexy dark red
+#f1c232 - sexy yellow
+#3b111e - decent burgandy
+#00000f - sexy black

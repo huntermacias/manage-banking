@@ -8,27 +8,19 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Form } from "@/components/ui/form"
 import { authFormSchema } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import CustomInput from './CustomInput';
-// import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions';
-// import PlaidLink from './PlaidLink';
+import PlaidLink from './PlaidLink';
+import { signIn, signUp } from '@/lib/actions/user.actions';
 
 const AuthForm = ({ type }: { type: string }) => {
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
 
     const formSchema = authFormSchema(type);
 
@@ -36,51 +28,45 @@ const AuthForm = ({ type }: { type: string }) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
+            email: '',
             password: ''
         },
     })
 
     // 2. Define a submit handler.
-    // const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    //   setIsLoading(true);
+    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setIsLoading(true);
 
-    //   try {
-    //     // Sign up with Appwrite & create plaid token
+        try {
+            if (type === 'sign-up') {
+                // console.log('User Data', data); // Correct place to log incoming data
+                const newUser = await signUp(data);
+                setUser(newUser); // Set the user in state
+                // console.log(`New User:`, newUser); // Log the newUser directly
 
-    //     if(type === 'sign-up') {
-    //       const userData = {
-    //         firstName: data.firstName!,
-    //         lastName: data.lastName!,
-    //         address1: data.address1!,
-    //         city: data.city!,
-    //         state: data.state!,
-    //         postalCode: data.postalCode!,
-    //         dateOfBirth: data.dateOfBirth!,
-    //         ssn: data.ssn!,
-    //         email: data.email,
-    //         password: data.password
-    //       }
+                // Additional check to redirect after sign up or handle new user info
+                if (newUser) {
+                    router.push('/'); // Redirect to home page
+                } else {
+                    throw new Error("Failed to create new user.");
+                }
+            }
 
-    //       const newUser = await signUp(userData);
-
-    //       setUser(newUser);
-    //     }
-
-    //     if(type === 'sign-in') {
-    //       const response = await signIn({
-    //         email: data.email,
-    //         password: data.password,
-    //       })
-
-    //       if(response) router.push('/')
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // }
+            if (type === 'sign-in') {
+                const response = await signIn({
+                    email: data.email,
+                    password: data.password,
+                });
+                if (response !== undefined) {
+                    router.push('/'); // Redirect on successful sign-in
+                }
+            }
+        } catch (error) {
+            console.error('Authentication error:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <section className="auth-form text-white p-8 md:p-12 rounded-lg shadow-xl">
@@ -106,12 +92,12 @@ const AuthForm = ({ type }: { type: string }) => {
             </header>
             {user ? (
                 <div className="flex flex-col gap-4">
-                    {/* <PlaidLink user={user} variant="primary" /> */}
+                    <PlaidLink user={user} variant="primary" />
                 </div>
             ) : (
                 <>
                     <Form {...form}>
-                        <form className="space-y-8">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             {type === 'sign-up' && (
                                 <>
                                     <div className="flex gap-4">
